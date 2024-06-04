@@ -2,13 +2,13 @@ import math
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
-from turtlesim.srv import Spawn, Kill
+from turtlesim.srv import Spawn, Kill, SetPen
 
 class PongNode(Node):
     theta = math.pi / 2
     
     def __init__(self, turtle_name):
-        super().__init__('pong_node_' + turtle_name)
+        super().__init__(turtle_name)
         self.spawn_request = Spawn.Request()
         self.turtle_name = turtle_name
         self.spawn_request.name = turtle_name
@@ -33,9 +33,20 @@ class PongNode(Node):
     def spawn_turtle_callback(self, future):
         try:
             response = future.result()
+            self.pen_off(1)
             self.get_logger().info('Turtle spawned')
         except Exception as e:
             self.get_logger().error('Service call failed %r' % (e,))
+
+    def pen_off(self, off) :
+        set_pen_request = SetPen.Request()
+        set_pen_request.off = off
+        print('/'+self.turtle_name+'/set_pen')
+        set_pen_client = self.create_client(SetPen, '/'+self.turtle_name+'/set_pen')
+
+        future =set_pen_client.call_async(set_pen_request)
+        rclpy.spin_until_future_complete(self, future)
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -56,6 +67,7 @@ def main(args=None):
     left_pong_node = PongNode('left_pong_node')
     right_pong_node = PongNode('right_pong_node')
 
+    # spawn turtles
     left_pong_node.spawn(1.0, 5.0)
     right_pong_node.spawn(10.0, 5.0)
 
