@@ -67,8 +67,8 @@ class BallNode(Node):
         right_y = self.pose_right_.y
 
         # Paddle dimensions
-        delta_x = 0.7
-        delta_y = 0.7
+        delta_x = 0.5
+        delta_y = 0.5
         paddle_size = 2.0 * delta_y
         max_bounce_angle = 5 * math.pi / 12
 

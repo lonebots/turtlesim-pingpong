@@ -1,6 +1,8 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
-package_name = 'turtlesim-pingpong'
+package_name = 'turtlesim_pingpong'
 
 setup(
     name=package_name,
@@ -10,16 +12,19 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*')))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='jishnu',
     maintainer_email='jishnusurajila@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='ros2 based turtlesim ping-pong game',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "ball_node = turtlesim_pingpong.ball_node:main",
+            "pong_node = turtlesim_pingpong.pong_node:main", 
         ],
     },
 )
