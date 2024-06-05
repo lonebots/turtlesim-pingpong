@@ -4,10 +4,11 @@ Simple project with turtle simulator, using ros2 nodes, topics, services, parame
 
 ### demo & rqt_graph
 
-<p align="center">
-<img src="documentation/turtlesim-pinpong-demo.gif" alt="turtlesim-pinpong-demo" height="350" width="auto">
-<img src="documentation/turtlesim-pinpong-graph.png" alt="turtlesim-pinpong-demo" height="350" width="auto">
-</p>
+<div style="text-align: center;">
+    <img src="documentation/turtlesim-pinpong-demo.gif" alt="turtlesim-pinpong-demo" style="display: inline-block; height: 350px; width: auto; margin-right: 10px;">
+    <img src="documentation/turtlesim-pinpong-graph.png" alt="turtlesim-pinpong-demo" style="display: inline-block; height: 350px; width: auto;">
+</div>
+
 
 ## Setup Locally ?
 
